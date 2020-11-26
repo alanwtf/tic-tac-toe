@@ -1,15 +1,148 @@
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+
+:root{
+    --cell-size: 200px;
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
+.header{
+    grid-column: 1 / -1;
+}
+
 .gameboard{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 5px;
-    width: 610px;
-    height: 600px;
     margin: 10px auto;
+    background-color: black;
+    justify-items: center;
+    align-items: center;
+    position: relative;
+}
+
+{
+
+}
+
+.cell{
+    background-color: #fff;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; 
+}
+
+.cell.x,
+.cell.o{
+    cursor: not-allowed;
+}
+
+
+.player{
+    align-self: center;
+    justify-self: center;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.o::before{
     background-color: black;
 }
 
-.square{
+.gameboard.x .cell:not(.x):not(.o):hover::before,
+.gameboard.x .cell:not(.x):not(.o):hover::after,
+.gameboard.o .cell:not(.x):not(.o):hover::before{
+    background-color: lightgrey;
+}
+
+
+
+.cell.x::before,
+.cell.x::after,
+.gameboard.x .cell:not(.x):not(.o):hover::before,
+.gameboard.x .cell:not(.x):not(.o):hover::after
+{
+    content: "";
+    position: absolute;
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+    
+}
+
+.cell.x::before,
+.gameboard.x .cell:not(.x):not(.o):hover::before{
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.gameboard.x .cell:not(.x):not(.o):hover::after{
+    transform: rotate(-45deg);
+}
+
+.cell.o::before,
+.cell.o::after,
+.gameboard.o .cell:not(.o):not(.x):hover::before,
+.gameboard.o .cell:not(.o):not(.x):hover::after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;    
+}
+
+.cell.o::before,
+.gameboard.o .cell:not(.x):not(.o):hover::before{
+    width: var(--mark-size);
+    height: var(--mark-size);
+}
+
+.cell.o::after,
+.gameboard.o .cell:not(.x):not(.o):hover::after{
+    width: calc(var(--mark-size) * .7);
+    height: calc(var(--mark-size) * .7);
     background-color: #fff;
-    width: 100%;
-    height: 200px;
+}
+
+.winning-message{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.8);
+    
+    align-items: center;
+    justify-content: center;
+}
+
+.winning-message div{
+    color: #fff;
+    font-size: 3em;
+    margin-right: 15px;
+}
+
+.winning-message button{
+    background-color: white;
+    border: 2px solid black;
+    padding: 5px 10px;
+    font-size: 2.5em;
+}
+
+.winning-message button:hover{
+    background-color: #000;
+    color: #fff;
+    border-color: #fff;
+    cursor: pointer;
+}
+
+.winning-message.show{
+    display: flex;
 }
