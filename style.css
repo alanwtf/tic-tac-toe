@@ -27,10 +27,6 @@
     position: relative;
 }
 
-{
-
-}
-
 .cell{
     background-color: #fff;
     width: var(--cell-size);
@@ -48,8 +44,11 @@
 
 
 .player{
-    align-self: center;
-    justify-self: center;
+    height: 100%;
+    transition: 1s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .cell.x::before,
@@ -145,4 +144,9 @@
 
 .winning-message.show{
     display: flex;
+}
+
+.your-turn{
+    background-color: lightblue;
+
 }
